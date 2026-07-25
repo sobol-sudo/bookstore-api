@@ -101,18 +101,18 @@ export class AuthService {
   }
 
   async logout(response: Response, token?: string) {
-    // Если токен передан, добавляем его в blacklist
+    // If a token was provided, add it to the blacklist
     if (token) {
       try {
         const decoded = this.jwtService.decode(token);
         if (decoded && typeof decoded === 'object' && 'exp' in decoded && decoded.exp) {
-          const ttl = decoded.exp - Math.floor(Date.now() / 1000); // секунды до истечения
+          const ttl = decoded.exp - Math.floor(Date.now() / 1000); // seconds until expiration
           if (ttl > 0) {
             await this.redisService.addToBlacklist(token, ttl);
           }
         }
       } catch (error) {
-        // Игнорируем ошибки декодирования токена
+        // Ignore token decoding errors
         console.error('Error adding token to blacklist:', error);
       }
     }
