@@ -463,6 +463,8 @@ curl -X POST http://localhost:3000/api/books \
 
 MIT
 
-## 👤 Author - sobol4156
+## Author
+
+Alexander Kolesnik — [@sobol-sudo](https://github.com/sobol-sudo)
 
 Bookstore API - NestJS Project
